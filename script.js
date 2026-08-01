@@ -20,20 +20,29 @@ function greet(hour) {
 
 function render(now) {
     const currentHour = now.getHours();
-
+    document.title
     greeting.textContent = greet(currentHour);
 
     toggleBtn.textContent = use12Hour ? "Switch to 24-hour" : "Switch to 12-hour";
 
     const displayHour = use12Hour ? currentHour % 12 || 12 : currentHour;
 
-    hour.textContent = String(displayHour).padStart(2, "0");
-    minute.textContent = String(now.getMinutes()).padStart(2, "0");
-    second.textContent = String(now.getSeconds()).padStart(2, "0");
+    
 
-    meridiem.textContent = use12Hour ? (currentHour >= 12 ? "PM" : "AM") : "";
+    const hourStr = String(displayHour).padStart(2, "0");
+    const minuteStr = String(now.getMinutes()).padStart(2, "0");
+    const secondStr = String(now.getSeconds()).padStart(2, "0");
+
+    hour.textContent = hourStr;
+    minute.textContent = minuteStr;
+    second.textContent = secondStr
+
+    const meridiemStr = use12Hour ? (currentHour >= 12 ? "PM" : "AM") : "";
+    meridiem.textContent = meridiemStr;
 
     date.textContent = dateFormatter.format(now);
+
+    document.title = `${hourStr}:${minuteStr}:${secondStr} ${meridiemStr}`
 }
 
 function updateClock() {
